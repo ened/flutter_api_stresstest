@@ -1,9 +1,12 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_api_stresstest/application.dart';
 import 'package:flutter_api_stresstest/routes.dart';
 
 class RootScreen extends StatelessWidget {
+  static const platform = const MethodChannel('io.flutter/stresstest');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,9 +26,9 @@ class RootScreen extends StatelessWidget {
             },
           ),
           ListTile(
-            title: Text("Native Widget Test"),
-            onTap: () {
-              debugPrint("Native Widget Test");
+            title: Text("Native Activity + Flutter Items Test"),
+            onTap: () async {
+              await platform.invokeMethod('nativeList');
             },
           ),
         ],
